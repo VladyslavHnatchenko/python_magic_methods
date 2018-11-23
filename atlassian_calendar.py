@@ -9,6 +9,7 @@ class Date(object):
         self.year = year
         self.era = era
 
+    """For calling magic method __str__ -> print(date_when_we_come)"""
     def __str__(self):
 
         def decade(i):
@@ -41,12 +42,21 @@ class Date(object):
                 4: "Эры Смерти"
             }[i]
 
-        return "%s %s %s %s %s %s %s"%(self.day, "День",
-                                       decade(self.decade),
-                                       month(self.month),
-                                       self.year, "Года",
-                                       era(self.era) if self.era else "")
+        return "%s %s %s %s %s %s %s" % \
+               (self.day, "День",  decade(self.decade), month(self.month),
+                self.year, "Года", era(self.era)
+                if self.era else "")
+
+    """For calling magic method __repr__ -> print(repr(date_when_we_come))"""
+    def __repr__(self):
+        return "[%s.%s.%s.%s.%s]" % \
+               (self.day, self.decade, self.month, self.year, self.era)
+
+    def to_string(self, long_format=True):
+        return self.__str__() \
+            if long_format else self.__repr__()
 
 
 date_when_we_come = Date(3, 2, 8, 7410)
-print(date_when_we_come)
+# print(date_when_we_come)
+# print(repr(date_when_we_come))
