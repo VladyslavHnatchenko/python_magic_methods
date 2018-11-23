@@ -119,3 +119,81 @@ class Date(object):
         date_when_we_come = Date(3, 2, 8, 7410)
         print(Date.from_complex(2963893+3j))
         print(date_when_we_come)"""
+
+    @classmethod
+    def from_int(cls, i):
+        return cls.from_complex(complex(i))
+
+    """For calling this method from_complex_ -> 
+        date_when_we_come = Date(3, 2, 8, 7410)
+        print(Date.from_int(2234333))"""
+
+    @staticmethod
+    def days_since_start_of_era(date):
+        return int(date) - 1
+
+    @property
+    def current_day_since_start_of_era(self):
+        return int(self)
+
+    @staticmethod
+    def decades_since_start_of_era(date):
+        return math.floor(int(date)/10)
+
+    @property
+    def current_decade_since_start_of_era(self):
+        return math.floor(int(self)/10)
+
+    @staticmethod
+    def months_since_start_of_era(date):
+        return math.floor(int(date)/40)
+
+    @property
+    def current_month_since_start_of_era(self):
+        return math.floor(int(self)/40) + 1
+
+    @staticmethod
+    def years_since_start_of_era(date):
+        return math.floor(int(date)/400)
+
+    @property
+    def current_year_since_start_of_era(self):
+        return math.floor(int(self)/400) + 1
+
+    """For calling this some method -> 
+        date = Date(3, 2, 8, 7410)
+        print(Date.months_since_start_of_era(1212121))"""
+
+    @staticmethod
+    def is_working_day(date):
+        return 1 < date.day < 10
+
+    @staticmethod
+    def is_decade_start_celebration(date):
+        return date.day == 1 and 1 < date.decade < 4
+
+    @staticmethod
+    def is_decade_end_celebration(date):
+        return date.day == 10 and 1 < date.decade < 4
+
+    @staticmethod
+    def is_month_start_celebration(date):
+        return date.day == 1 and date.decade == 1
+
+    @staticmethod
+    def is_month_end_celebration(date):
+        return date.day == 10 and date.decade == 4
+
+    """Methods for equality
+        __eq__ (==) equal
+        __ne__ (!=) not equal
+        __lt__ (<) less than
+        __gt__ (>) greater than
+        __le__ (<=) less than or equal
+        __ge__ (>=) greater than or equal
+    """
+    def __eq__(self, other):
+        return complex(self) == complex(other)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
