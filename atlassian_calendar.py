@@ -217,4 +217,49 @@ class Date(object):
     def __ge__(self, other):
         return True if self.__gt__(other) or self.__eq__(other) else False
 
+    """Next magic methods:
+        __add__ (self + other) add
+        __radd__ (other + self) reflected add
+        __sub__ (self - other) subtract
+        __iadd__ (self += other) 
+        __isub__ (self -= other)
+    """
+
+    def __add__(self, other):
+        return self.from_complex(complex(self) + other)
+
+    def __radd__(self, other):
+        return self + other
+
+    def __sub__(self, other):
+        if int(self) - other < 0:
+            return "Somewhere in the %s era"%(self.era - 1)
+        else:
+            return self.from_complex(complex(self) - other)
+
+    def __iadd__(self, other):
+        self = self + other
+        return self
+
+    def __isub__(self, other):
+        self = self - other
+        return self
+
+    """Next methods"""
+
+    def add_days(self, days):
+        return self + days
+
+    def add_decades(self, decades):
+        return self + decades * 10
+
+    def add_month(self, months):
+        return self + months * 40
+
+    def add_years(self, years):
+        return self + years * 400
+
+    @staticmethod
+    def time_delta(date1, date2, absolute=True):
+        return abs(int(date1) - int(date2)) if absolute else int(date1) - int(date2)
     
