@@ -160,7 +160,7 @@ class Date(object):
     def current_year_since_start_of_era(self):
         return math.floor(int(self)/400) + 1
 
-    """For calling this some method -> 
+    """For calling this method -> 
         date = Date(3, 2, 8, 7410)
         print(Date.months_since_start_of_era(1212121))"""
 
@@ -197,3 +197,24 @@ class Date(object):
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __lt__(self, other):
+        return int(self) < int(other) if self.era <= other.era else False
+
+    def __gt__(self, other):
+        if self.era >= other.era:
+            return int(self) > int(other)
+        else:
+            return False
+
+    """For calling this method -> 
+        result = Date(1, 2, 2, 2, 3) < Date(1, 2, 2, 3, 3)
+        print(result)"""
+
+    def __le__(self, other):
+        return True if self.__lt__(other) or self.__eq__(other) else False
+
+    def __ge__(self, other):
+        return True if self.__gt__(other) or self.__eq__(other) else False
+
+    
